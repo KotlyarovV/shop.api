@@ -18,9 +18,10 @@ from django.conf.urls import url
 from django.urls import path, include, re_path
 from rest_auth.registration.views import VerifyEmailView
 from rest_framework import routers
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 from shop_app import views
 
-from rest_framework_swagger.views import get_swagger_view
+#from rest_framework_swagger.views import get_swagger_view
 
 #schema_view = get_swagger_view(title='Shop API')
 router = routers.DefaultRouter()

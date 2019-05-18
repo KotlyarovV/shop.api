@@ -45,8 +45,8 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         return instance
 
+
 class BookSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Book
         fields = ('id', 'author', 'bookName', 'price', 'image')
-
