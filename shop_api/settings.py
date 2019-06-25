@@ -25,11 +25,20 @@ SECRET_KEY = '(&=%w3n-&a3y9745%^l=(z)7w=@ks+q-s3o9m^n#(ikofzm19_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = (
+    'Access-Control-Allow-Origin: *',
+)
 # Application definition
+CORS_REPLACE_HTTPS_REFERER = True
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'localhost:3000',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -42,23 +51,23 @@ INSTALLED_APPS = [
     'shop_app.apps.ShopAppConfig',
     'rest_framework_swagger',
     'rest_framework',
-    'rest_auth',
+    'rest_framework.authtoken',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'rest_framework.authtoken',
+    'rest_auth',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
+    'corsheaders.middleware.CorsPostCsrfMiddleware',
 ]
 
 
@@ -76,7 +85,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
 
- #               "allauth.account.context_processors.account",
+             #   "allauth.account.context_processors.account",
             ],
         },
     },
@@ -140,7 +149,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        #'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
@@ -150,3 +159,8 @@ REST_FRAMEWORK = {
 REST_USE_JWT = True
 
 AUTH_USER_MODEL = 'shop_app.User'
+SESSION_COOKIE_SAMESITE = None
+CSRF_USE_SESSIONS = False
+CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False

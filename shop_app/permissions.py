@@ -4,7 +4,6 @@ from rest_framework import permissions
 class IsLoggedInUser(permissions.BasePermission):
 
     def has_permission(self, request, view):
-
         return request.user
 
     def has_object_permission(self, request, view, obj):

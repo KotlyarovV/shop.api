@@ -1,9 +1,6 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import User
 from rest_framework import serializers
-
 from shop_app.models import Book, UserProfile, User
-
-from rest_auth.registration.serializers import RegisterSerializer
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

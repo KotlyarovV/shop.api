@@ -15,10 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf.urls import url
-from django.urls import path, include, re_path
-from rest_auth.registration.views import VerifyEmailView
+from django.urls import path, include
 from rest_framework import routers
-from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 from shop_app import views
 
 #from rest_framework_swagger.views import get_swagger_view

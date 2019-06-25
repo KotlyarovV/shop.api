@@ -1,16 +1,9 @@
-from django.http import HttpResponse, JsonResponse, Http404
-
 from shop_app.permissions import IsLoggedInUser, NON
 from shop_app.serializers import BookSerializer
-
 from shop_app.serializers import UserSerializer
 from .models import Book, User
 from rest_framework import viewsets
-from rest_framework.permissions import AllowAny, NOT
-from rest_auth.registration.views import RegisterView
-from rest_framework.decorators import action
-from django.forms.models import model_to_dict
-from django.shortcuts import get_object_or_404
+from rest_framework.permissions import AllowAny
 
 
 class BookViewSet(viewsets.ReadOnlyModelViewSet):
@@ -19,6 +12,7 @@ class BookViewSet(viewsets.ReadOnlyModelViewSet):
 
     def get_permissions(self):
         return [permission() for permission in [AllowAny]]
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
