@@ -1,6 +1,32 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from shop_app.models import Book, UserProfile, User
+from shop_app.models import Book, UserProfile, User, Order, BookInOrder
+
+
+class BookInOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BookInOrder
+        fields = ('book', 'quantity')
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order = BookInOrderSerializer(many=True)
+
+    class Meta:
+        model = Order
+        fields = ('address', 'country', 'city', 'zip', 'order', 'email')
+
+    def create(self, validated_data):
+        books_in_order_data = validated_data.pop('order')
+        order = Order.objects.create(**validated_data)
+        for book_data in books_in_order_data:
+            BookInOrder.objects.create(order=order, **book_data)
+
+        request = self.context.get("request")
+        if request and hasattr(request, "user"):
+            order.user = request.user
+
+        return order
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

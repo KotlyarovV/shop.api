@@ -25,6 +25,7 @@ from shop_app import views
 router = routers.DefaultRouter()
 router.register(r'books', views.BookViewSet)
 router.register(r'users', views.UserViewSet)
+router.register(r'order', views.OrderViewSet)
 #router.register(r'user', views.CustomRegisterView.as_view(), base_name='user')
 
 urlpatterns = [

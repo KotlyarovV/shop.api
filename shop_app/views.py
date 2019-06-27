@@ -1,9 +1,17 @@
 from shop_app.permissions import IsLoggedInUser, NON
-from shop_app.serializers import BookSerializer
+from shop_app.serializers import BookSerializer, OrderSerializer
 from shop_app.serializers import UserSerializer
-from .models import Book, User
+from .models import Book, User, Order
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def get_permissions(self):
+        return [permission() for permission in [AllowAny]]
 
 
 class BookViewSet(viewsets.ReadOnlyModelViewSet):

@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     'rest_auth',
 ]
 
+SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'corsheaders.middleware.CorsMiddleware',
