@@ -24,7 +24,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
         request = self.context.get("request")
         if request and hasattr(request, "user"):
-            order.user = request.user
+            if request.user.pk:
+                order.user = request.user
 
         return order
 
